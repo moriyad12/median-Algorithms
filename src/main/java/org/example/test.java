@@ -88,7 +88,8 @@ public class test {
             int result2 = medianAlgorithms.medianOfMedians(copyList2,med);
             long endTime3 = System.currentTimeMillis();
             median+= (endTime3 - startTime3);
-            assertEquals(expected, result2);}
+            assertEquals(expected, result2);
+            }
         System.out.println("naive sort Execution Time: " + naive/10 + "ms");
         System.out.println("RandomizeDivideAndConquer Execution Time: " + randomized/10 + "ms");
         System.out.println("median of medians Execution Time: " + median/10 + "ms");
