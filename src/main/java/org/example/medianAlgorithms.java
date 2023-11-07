@@ -14,11 +14,11 @@ public class medianAlgorithms {
     }
     public static int randomizeDivideAndConquer(int[] data,int med,int left ,int right){
         int n=right-left+1;
-        Random random = new Random();
-        int randomIndex = left;
-        if(n-1>0){
-            randomIndex = left+random.nextInt(n-1);
+        if(n==1){
+            return data[left];
         }
+        Random random = new Random();
+        int randomIndex = left+random.nextInt(n-1);
         swap(data,left,randomIndex);
         int j=left;
         for(int i=left+1;i<right+1;i++){
