@@ -14,31 +14,36 @@ public class test {
         return data;
     }
     @Test
-    public void testRandomizeDivideAndConquer1e8Data() {
-        int[] data = generateLargeRandomArrayList(100_000_000);
-        int med = 50_000_000-1;
-        int left = 0;
-        int right = data.length - 1;
-        int[] copyList = Arrays.copyOf(data, data.length);
-        int[] copyList2 = Arrays.copyOf(data, data.length);
-        long startTime1 = System.currentTimeMillis();
-        int expected = medianAlgorithms.naiveSort(copyList,med);
-        long endTime1 = System.currentTimeMillis();
-        System.out.println("naive sort Execution Time: " + (endTime1 - startTime1) + "ms");
-        long startTime2 = System.currentTimeMillis();
-        int result = medianAlgorithms.randomizeDivideAndConquer(data, med, left, right);
-        long endTime2 = System.currentTimeMillis();
-        System.out.println("RandomizeDivideAndConquer Execution Time: " + (endTime2 - startTime2) + "ms");
-        assertEquals(expected, result);
-        long startTime3 = System.currentTimeMillis();
-        int result2 = medianAlgorithms.medianOfMedians(copyList2,med);
-        long endTime3 = System.currentTimeMillis();
-        System.out.println("median of medians Execution Time: " + (endTime3 - startTime3) + "ms");
-        assertEquals(expected, result2);
+    public void test5e7Data() {
+        long naive=0,randomized=0,median=0;
+        for(int i=0;i<10;i++){
+            int[] data = generateLargeRandomArrayList(50_000_000);
+            int med = 2500_000-1;
+            int left = 0;
+            int right = data.length - 1;
+            int[] copyList = Arrays.copyOf(data, data.length);
+            int[] copyList2 = Arrays.copyOf(data, data.length);
+            long startTime1 = System.nanoTime();
+            int expected = medianAlgorithms.naiveSort(copyList,med);
+            long endTime1 = System.nanoTime();
+            naive+=(endTime1 - startTime1);
+            long startTime2 = System.nanoTime();
+            int result = medianAlgorithms.randomizeDivideAndConquer(data, med, left, right);
+            long endTime2 = System.nanoTime();
+            randomized+= (endTime2 - startTime2);
+            assertEquals(expected, result);
+            long startTime3 = System.nanoTime();
+            int result2 = medianAlgorithms.medianOfMedians(copyList2,med, left, right);
+            long endTime3 = System.nanoTime();
+            median+= (endTime3 - startTime3);
+            assertEquals(expected, result2);}
+        System.out.println("naive sort Execution Time: " + naive/10 + "ns");
+        System.out.println("RandomizeDivideAndConquer Execution Time: " + randomized/10 + "ns");
+        System.out.println("median of medians Execution Time: " + median/10 + "ns");
     }
 
     @Test
-    public void testRandomizeDivideAndConquer1e7Data() {
+    public void test1e7Data() {
         long naive=0,randomized=0,median=0;
         for(int i=0;i<10;i++){
         int[] data = generateLargeRandomArrayList(10_000_000);
@@ -47,26 +52,54 @@ public class test {
         int right = data.length - 1;
         int[] copyList = Arrays.copyOf(data, data.length);
         int[] copyList2 = Arrays.copyOf(data, data.length);
-        long startTime1 = System.currentTimeMillis();
+        long startTime1 = System.nanoTime();
         int expected = medianAlgorithms.naiveSort(copyList,med);
-        long endTime1 = System.currentTimeMillis();
+        long endTime1 = System.nanoTime();
         naive+=(endTime1 - startTime1);
-        long startTime2 = System.currentTimeMillis();
+        long startTime2 = System.nanoTime();
         int result = medianAlgorithms.randomizeDivideAndConquer(data, med, left, right);
-        long endTime2 = System.currentTimeMillis();
+        long endTime2 = System.nanoTime();
         randomized+= (endTime2 - startTime2);
         assertEquals(expected, result);
-        long startTime3 = System.currentTimeMillis();
-        int result2 = medianAlgorithms.medianOfMedians(copyList2,med);
-        long endTime3 = System.currentTimeMillis();
+        long startTime3 = System.nanoTime();
+        int result2 = medianAlgorithms.medianOfMedians(copyList2,med, left, right);
+        long endTime3 = System.nanoTime();
          median+= (endTime3 - startTime3);
         assertEquals(expected, result2);}
-        System.out.println("naive sort Execution Time: " + naive/10 + "ms");
-        System.out.println("RandomizeDivideAndConquer Execution Time: " + randomized/10 + "ms");
-        System.out.println("median of medians Execution Time: " + median/10 + "ms");
+        System.out.println("naive sort Execution Time: " + naive/10 + "ns");
+        System.out.println("RandomizeDivideAndConquer Execution Time: " + randomized/10 + "ns");
+        System.out.println("median of medians Execution Time: " + median/10 + "ns");
     }
     @Test
-    public void testRandomizeDivideAndConquer1e6Data() {
+    public void test5e6Data() {
+        long naive=0,randomized=0,median=0;
+        for(int i=0;i<10;i++){
+            int[] data = generateLargeRandomArrayList(50_000_00);
+            int med = 2500_00-1;
+            int left = 0;
+            int right = data.length - 1;
+            int[] copyList = Arrays.copyOf(data, data.length);
+            int[] copyList2 = Arrays.copyOf(data, data.length);
+            long startTime1 = System.nanoTime();
+            int expected = medianAlgorithms.naiveSort(copyList,med);
+            long endTime1 = System.nanoTime();
+            naive+=(endTime1 - startTime1);
+            long startTime2 = System.nanoTime();
+            int result = medianAlgorithms.randomizeDivideAndConquer(data, med, left, right);
+            long endTime2 = System.nanoTime();
+            randomized+= (endTime2 - startTime2);
+            assertEquals(expected, result);
+            long startTime3 = System.nanoTime();
+            int result2 = medianAlgorithms.medianOfMedians(copyList2,med, left, right);
+            long endTime3 = System.nanoTime();
+            median+= (endTime3 - startTime3);
+            assertEquals(expected, result2);}
+        System.out.println("naive sort Execution Time: " + naive/10 + "ns");
+        System.out.println("RandomizeDivideAndConquer Execution Time: " + randomized/10 + "ns");
+        System.out.println("median of medians Execution Time: " + median/10 + "ns");
+    }
+    @Test
+    public void test1e6Data() {
         long naive=0,randomized=0,median=0;
         for(int i=0;i<10;i++){
             int[] data = generateLargeRandomArrayList(10_000_00);
@@ -75,27 +108,27 @@ public class test {
             int right = data.length - 1;
             int[] copyList = Arrays.copyOf(data, data.length);
             int[] copyList2 = Arrays.copyOf(data, data.length);
-            long startTime1 = System.currentTimeMillis();
+            long startTime1 = System.nanoTime();
             int expected = medianAlgorithms.naiveSort(copyList,med);
-            long endTime1 = System.currentTimeMillis();
+            long endTime1 = System.nanoTime();
             naive+=(endTime1 - startTime1);
-            long startTime2 = System.currentTimeMillis();
+            long startTime2 = System.nanoTime();
             int result = medianAlgorithms.randomizeDivideAndConquer(data, med, left, right);
-            long endTime2 = System.currentTimeMillis();
+            long endTime2 = System.nanoTime();
             randomized+= (endTime2 - startTime2);
             assertEquals(expected, result);
-            long startTime3 = System.currentTimeMillis();
-            int result2 = medianAlgorithms.medianOfMedians(copyList2,med);
-            long endTime3 = System.currentTimeMillis();
+            long startTime3 = System.nanoTime();
+            int result2 = medianAlgorithms.medianOfMedians(copyList2,med, left, right);
+            long endTime3 = System.nanoTime();
             median+= (endTime3 - startTime3);
             assertEquals(expected, result2);
             }
-        System.out.println("naive sort Execution Time: " + naive/10 + "ms");
-        System.out.println("RandomizeDivideAndConquer Execution Time: " + randomized/10 + "ms");
-        System.out.println("median of medians Execution Time: " + median/10 + "ms");
+        System.out.println("naive sort Execution Time: " + naive/10 + "ns");
+        System.out.println("RandomizeDivideAndConquer Execution Time: " + randomized/10 + "ns");
+        System.out.println("median of medians Execution Time: " + median/10 + "ns");
     }
     @Test
-    public void testRandomizeDivideAndConquer1e5Data() {
+    public void test1e5Data() {
         long naive=0,randomized=0,median=0;
         for(int i=0;i<10;i++){
             int[] data = generateLargeRandomArrayList(100_000);
@@ -104,26 +137,26 @@ public class test {
             int right = data.length - 1;
             int[] copyList = Arrays.copyOf(data, data.length);
             int[] copyList2 = Arrays.copyOf(data, data.length);
-            long startTime1 = System.currentTimeMillis();
+            long startTime1 = System.nanoTime();
             int expected = medianAlgorithms.naiveSort(copyList,med);
-            long endTime1 = System.currentTimeMillis();
+            long endTime1 = System.nanoTime();
             naive+=(endTime1 - startTime1);
-            long startTime2 = System.currentTimeMillis();
+            long startTime2 = System.nanoTime();
             int result = medianAlgorithms.randomizeDivideAndConquer(data, med, left, right);
-            long endTime2 = System.currentTimeMillis();
+            long endTime2 = System.nanoTime();
             randomized+= (endTime2 - startTime2);
             assertEquals(expected, result);
-            long startTime3 = System.currentTimeMillis();
-            int result2 = medianAlgorithms.medianOfMedians(copyList2,med);
-            long endTime3 = System.currentTimeMillis();
+            long startTime3 = System.nanoTime();
+            int result2 = medianAlgorithms.medianOfMedians(copyList2,med, left, right);
+            long endTime3 = System.nanoTime();
             median+= (endTime3 - startTime3);
             assertEquals(expected, result2);}
-        System.out.println("naive sort Execution Time: " + naive/10 + "ms");
-        System.out.println("RandomizeDivideAndConquer Execution Time: " + randomized/10 + "ms");
-        System.out.println("median of medians Execution Time: " + median/10 + "ms");
+        System.out.println("naive sort Execution Time: " + naive/10 + "ns");
+        System.out.println("RandomizeDivideAndConquer Execution Time: " + randomized/10 + "ns");
+        System.out.println("median of medians Execution Time: " + median/10 + "ns");
     }
     @Test
-    public void testRandomizeDivideAndConquer1e4Data() {
+    public void test1e4Data() {
         long naive=0,randomized=0,median=0;
         for(int i=0;i<10;i++){
             int[] data = generateLargeRandomArrayList(10_000);
@@ -132,26 +165,26 @@ public class test {
             int right = data.length - 1;
             int[] copyList = Arrays.copyOf(data, data.length);
             int[] copyList2 = Arrays.copyOf(data, data.length);
-            long startTime1 = System.currentTimeMillis();
+            long startTime1 = System.nanoTime();
             int expected = medianAlgorithms.naiveSort(copyList,med);
-            long endTime1 = System.currentTimeMillis();
+            long endTime1 = System.nanoTime();
             naive+=(endTime1 - startTime1);
-            long startTime2 = System.currentTimeMillis();
+            long startTime2 = System.nanoTime();
             int result = medianAlgorithms.randomizeDivideAndConquer(data, med, left, right);
-            long endTime2 = System.currentTimeMillis();
+            long endTime2 = System.nanoTime();
             randomized+= (endTime2 - startTime2);
             assertEquals(expected, result);
-            long startTime3 = System.currentTimeMillis();
-            int result2 = medianAlgorithms.medianOfMedians(copyList2,med);
-            long endTime3 = System.currentTimeMillis();
+            long startTime3 = System.nanoTime();
+            int result2 = medianAlgorithms.medianOfMedians(copyList2,med, left, right);
+            long endTime3 = System.nanoTime();
             median+= (endTime3 - startTime3);
             assertEquals(expected, result2);}
-        System.out.println("naive sort Execution Time: " + naive/10 + "ms");
-        System.out.println("RandomizeDivideAndConquer Execution Time: " + randomized/10 + "ms");
-        System.out.println("median of medians Execution Time: " + median/10 + "ms");
+        System.out.println("naive sort Execution Time: " + naive/10 + "ns");
+        System.out.println("RandomizeDivideAndConquer Execution Time: " + randomized/10 + "ns");
+        System.out.println("median of medians Execution Time: " + median/10 + "ns");
     }
     @Test
-    public void testRandomizeDivideAndConquer1e3Data() {
+    public void test1e3Data() {
         long naive=0,randomized=0,median=0;
         for(int i=0;i<10;i++){
             int[] data = generateLargeRandomArrayList(1000);
@@ -160,26 +193,26 @@ public class test {
             int right = data.length - 1;
             int[] copyList = Arrays.copyOf(data, data.length);
             int[] copyList2 = Arrays.copyOf(data, data.length);
-            long startTime1 = System.currentTimeMillis();
+            long startTime1 = System.nanoTime();
             int expected = medianAlgorithms.naiveSort(copyList,med);
-            long endTime1 = System.currentTimeMillis();
+            long endTime1 = System.nanoTime();
             naive+=(endTime1 - startTime1);
-            long startTime2 = System.currentTimeMillis();
+            long startTime2 = System.nanoTime();
             int result = medianAlgorithms.randomizeDivideAndConquer(data, med, left, right);
-            long endTime2 = System.currentTimeMillis();
+            long endTime2 = System.nanoTime();
             randomized+= (endTime2 - startTime2);
             assertEquals(expected, result);
-            long startTime3 = System.currentTimeMillis();
-            int result2 = medianAlgorithms.medianOfMedians(copyList2,med);
-            long endTime3 = System.currentTimeMillis();
+            long startTime3 = System.nanoTime();
+            int result2 = medianAlgorithms.medianOfMedians(copyList2,med, left, right);
+            long endTime3 = System.nanoTime();
             median+= (endTime3 - startTime3);
             assertEquals(expected, result2);}
-        System.out.println("naive sort Execution Time: " + naive/10 + "ms");
-        System.out.println("RandomizeDivideAndConquer Execution Time: " + randomized/10 + "ms");
-        System.out.println("median of medians Execution Time: " + median/10 + "ms");
+        System.out.println("naive sort Execution Time: " + naive/10 + "ns");
+        System.out.println("RandomizeDivideAndConquer Execution Time: " + randomized/10 + "ns");
+        System.out.println("median of medians Execution Time: " + median/10 + "ns");
     }
     @Test
-    public void testRandomizeDivideAndConquer1e2Data() {
+    public void test1e2Data() {
         long naive=0,randomized=0,median=0;
         for(int i=0;i<10;i++){
             int[] data = generateLargeRandomArrayList(100);
@@ -188,49 +221,49 @@ public class test {
             int right = data.length - 1;
             int[] copyList = Arrays.copyOf(data, data.length);
             int[] copyList2 = Arrays.copyOf(data, data.length);
-            long startTime1 = System.currentTimeMillis();
+            long startTime1 = System.nanoTime();
             int expected = medianAlgorithms.naiveSort(copyList,med);
-            long endTime1 = System.currentTimeMillis();
+            long endTime1 = System.nanoTime();
             naive+=(endTime1 - startTime1);
-            long startTime2 = System.currentTimeMillis();
+            long startTime2 = System.nanoTime();
             int result = medianAlgorithms.randomizeDivideAndConquer(data, med, left, right);
-            long endTime2 = System.currentTimeMillis();
+            long endTime2 = System.nanoTime();
             randomized+= (endTime2 - startTime2);
             assertEquals(expected, result);
-            long startTime3 = System.currentTimeMillis();
-            int result2 = medianAlgorithms.medianOfMedians(copyList2,med);
-            long endTime3 = System.currentTimeMillis();
+            long startTime3 = System.nanoTime();
+            int result2 = medianAlgorithms.medianOfMedians(copyList2,med, left, right);
+            long endTime3 = System.nanoTime();
             median+= (endTime3 - startTime3);
             assertEquals(expected, result2);}
-        System.out.println("naive sort Execution Time: " + naive/10 + "ms");
-        System.out.println("RandomizeDivideAndConquer Execution Time: " + randomized/10 + "ms");
-        System.out.println("median of medians Execution Time: " + median/10 + "ms");
+        System.out.println("naive sort Execution Time: " + naive/10 + "ns");
+        System.out.println("RandomizeDivideAndConquer Execution Time: " + randomized/10 + "ns");
+        System.out.println("median of medians Execution Time: " + median/10 + "ns");
     }
     @Test
-    public void testRandomizeDivideAndConquer1e1Data() {
+    public void test1e1Data() {
         int[] data = generateLargeRandomArrayList(10);
         int med = 5-1;
         int left = 0;
         int right = data.length - 1;
         int[] copyList = Arrays.copyOf(data, data.length);
         int[] copyList2 = Arrays.copyOf(data, data.length);
-        long startTime1 = System.currentTimeMillis();
+        long startTime1 = System.nanoTime();
         int expected = medianAlgorithms.naiveSort(copyList,med);
-        long endTime1 = System.currentTimeMillis();
-        System.out.println("naive sort Execution Time: " + (endTime1 - startTime1) + "ms");
-        long startTime2 = System.currentTimeMillis();
+        long endTime1 = System.nanoTime();
+        System.out.println("naive sort Execution Time: " + (endTime1 - startTime1) + "ns");
+        long startTime2 = System.nanoTime();
         int result = medianAlgorithms.randomizeDivideAndConquer(data, med, left, right);
-        long endTime2 = System.currentTimeMillis();
-        System.out.println("RandomizeDivideAndConquer Execution Time: " + (endTime2 - startTime2) + "ms");
+        long endTime2 = System.nanoTime();
+        System.out.println("RandomizeDivideAndConquer Execution Time: " + (endTime2 - startTime2) + "ns");
         assertEquals(expected, result);
-        long startTime3 = System.currentTimeMillis();
-        int result2 = medianAlgorithms.medianOfMedians(copyList2,med);
-        long endTime3 = System.currentTimeMillis();
-        System.out.println("median of medians Execution Time: " + (endTime3 - startTime3) + "ms");
+        long startTime3 = System.nanoTime();
+        int result2 = medianAlgorithms.medianOfMedians(copyList2,med, left, right);
+        long endTime3 = System.nanoTime();
+        System.out.println("median of medians Execution Time: " + (endTime3 - startTime3) + "ns");
         assertEquals(expected, result2);
     }
     @Test
-    public void testRandomizeDivideAndConquer1e0Data() {
+    public void test1e0Data() {
         long naive=0,randomized=0,median=0;
         for(int i=0;i<10;i++){
             int[] data = generateLargeRandomArrayList(1);
@@ -239,23 +272,23 @@ public class test {
             int right = data.length - 1;
             int[] copyList = Arrays.copyOf(data, data.length);
             int[] copyList2 = Arrays.copyOf(data, data.length);
-            long startTime1 = System.currentTimeMillis();
+            long startTime1 = System.nanoTime();
             int expected = medianAlgorithms.naiveSort(copyList,med);
-            long endTime1 = System.currentTimeMillis();
+            long endTime1 = System.nanoTime();
             naive+=(endTime1 - startTime1);
-            long startTime2 = System.currentTimeMillis();
+            long startTime2 = System.nanoTime();
             int result = medianAlgorithms.randomizeDivideAndConquer(data, med, left, right);
-            long endTime2 = System.currentTimeMillis();
+            long endTime2 = System.nanoTime();
             randomized+= (endTime2 - startTime2);
             assertEquals(expected, result);
-            long startTime3 = System.currentTimeMillis();
-            int result2 = medianAlgorithms.medianOfMedians(copyList2,med);
-            long endTime3 = System.currentTimeMillis();
+            long startTime3 = System.nanoTime();
+            int result2 = medianAlgorithms.medianOfMedians(copyList2,med, left, right);
+            long endTime3 = System.nanoTime();
             median+= (endTime3 - startTime3);
             assertEquals(expected, result2);}
-        System.out.println("naive sort Execution Time: " + naive/10 + "ms");
-        System.out.println("RandomizeDivideAndConquer Execution Time: " + randomized/10 + "ms");
-        System.out.println("median of medians Execution Time: " + median/10 + "ms");
+        System.out.println("naive sort Execution Time: " + naive/10 + "ns");
+        System.out.println("RandomizeDivideAndConquer Execution Time: " + randomized/10 + "ns");
+        System.out.println("median of medians Execution Time: " + median/10 + "ns");
     }
 
 }

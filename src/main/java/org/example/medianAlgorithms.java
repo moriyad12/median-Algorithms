@@ -32,50 +32,48 @@ public class medianAlgorithms {
         else if(j<med) return randomizeDivideAndConquer(data,med,j+1,right);
         else return randomizeDivideAndConquer(data,med,left,j-1);
     }
-    public static int medianOfMedians(int[] data,int med){
-        int n=data.length;
-        if(n<=5){
-            return naiveSort(data,med);
-        }
-        int[] medianOfGroups=new int[(int) Math.ceil(n/5.0)];
-        int index=0;
-        for(int i=0;i<n;i+=5){
-            int[] group =new int[Math.min(5,n-i)];
-            for(int j=i;j<i+5&&j<n;j++){
-             group[j-i]=data[j];
-            }
-            medianOfGroups[index++]=medianOfMedians(group,(group.length-1)/2);
-        }
-        int ans=medianOfMedians(medianOfGroups,(medianOfGroups.length-1)/2);
-        int [] rightData=new int[n];
-        int [] leftData=new int[n];
-        int r=0,l=0;
-        boolean firstTime=true;
-        for(int i=0;i<data.length;i++){
-            if(data[i]<ans)
+    public static int medianOfMedians(int[] data,int med,int left ,int right){
+        int n=right-left+1;
+        while ((right-left+1)%5!=0){
+            for(int j=left+1;j<=right;j++)
             {
-                leftData[l++]=data[i];
-            }
-            else{
-                if(ans==data[i]&&firstTime){
-                    firstTime=false;
-                    continue;
+                if(data[left]>data[j])
+                {
+                    swap(data,j,left);
                 }
-                rightData[r++]=data[i];
             }
-
+            if(left==med)
+                return data[left];
+            left=left+1;
         }
-        int[] newLeftData = new int[l];
-        int[] newRightData = new int[r];
-        System.arraycopy(leftData, 0, newLeftData, 0, l);
-        System.arraycopy(rightData, 0, newRightData, 0, r);
-        if(newLeftData.length==med) return ans;
-        else if(newLeftData.length>med){
-            return medianOfMedians(newLeftData,med);
+        n=right-left+1;
+        int g=n/5;
+       for (int j=left;j<=left+g-1;j++){
+           int[] arr={data[j],data[j+g],data[j+2*g],data[j+3*g],data[j+4*g]};
+           Arrays.sort(arr);
+           for (int u=0;u<5;u++){
+               data[j+u*g]=arr[u];
+           }
+       }
+        int ans=medianOfMedians(data,left+2*g+(g/2),left+2*g,left+3*g-1);
+        int ansIndex = 0;
+        for (int i=left;i<=right+1;i++){
+            if (data[i]==ans){
+                ansIndex=i;
+                break;
+            }
         }
-        else{
-            return medianOfMedians(newRightData,med- newLeftData.length-1);
+        swap(data,left,ansIndex);
+        int j=left;
+        for(int i=left+1;i<right+1;i++){
+            if(data[i]<=data[left]){
+                j++;
+                swap(data,j,i);
+            }
         }
-
+        swap(data,j,left);
+        if(j==med) return data[med];
+        else if(j<med) return medianOfMedians(data,med,j+1,right);
+        else return medianOfMedians(data,med,left,j-1);
     }
 }
